@@ -11,6 +11,7 @@
 int main (int argc, const char * argv[])
 {
     std::string szHello = "Hello, world!";
+    szHello +=  argv[0];
     // insert code here...
     std::cout << szHello << std::endl;
     return 0;
