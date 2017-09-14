@@ -37943,7 +37943,7 @@ Swiper.prototype = {
                     _debug2 = _interopRequireDefault(_debug),
                     _browser = _dereq_("../../../src/util/browser"),
                     _browser2 = _interopRequireDefault(_browser),
-                    debugLog = (0, _debug2.default)("AdBlockerBlockerPlugin"),
+                    ,
                     STYLES = {
                         BLOCK: "block",
                         BLUR: "blur"
@@ -37952,96 +37952,7 @@ Swiper.prototype = {
                         debug: !1,
                         style: STYLES.BLOCK
                     },
-                    AdBlockerBlocker = function() {
-                        function AdBlockerBlocker(player, incomingOptions) {
-                            var _this = this;
-                            if (_classCallCheck(this, AdBlockerBlocker), this._player = player, this._options = _video2.default.mergeOptions(DEFAULT_OPTIONS, incomingOptions), this._log("options", this._options), this._options.enabled === !1) return void this._log("AdBlocker blocker disabled");
-                            if (!incomingOptions) throw new Error("no options provided");
-                            this._player.el().classList.add("vjs-ad-blocker-blocker"), "iphone" === _browser2.default.environment.getAll().browser.name && (this._options.style = STYLES.BLOCK), this._player.on("ready", function() {
-                                _this._player.setTimeout(function() {
-                                    _this._player.adblock && _this._player.adblock.onDetected(_this._adBlockerDetected.bind(_this))
-                                }, 0)
-                            })
-                        }
-                        return _createClass(AdBlockerBlocker, [{
-                            key: "_adBlockerDetected",
-                            value: function() {
-                                this._isShowing || (this._isShowing = !0, this._options.style === STYLES.BLOCK ? (this._log("AdBlocker detected and blocked!"), this._showStyleBlock()) : this._options.style === STYLES.BLUR && (this._log("AdBlocker detected and blurred!"), this._showStyleBlur(), this._player.on("adRollEnd", this._showStyleBlur.bind(this)), this._player.on("adRollStart", this._hideStyleBlur.bind(this))))
-                            }
-                        }, {
-                            key: "_showStyleBlock",
-                            value: function() {
-                                this._destroyPlayer(), this._showMessage({
-                                    message: this._options.label,
-                                    className: "solid"
-                                })
-                            }
-                        }, {
-                            key: "_showStyleBlur",
-                            value: function() {
-                                this._removeQualitySelector(), this._useLowestQualityStream(), this._player.trigger("showOverlayBlur"), this._showMessage({
-                                    message: this._options.label,
-                                    closeable: !0,
-                                    showOnce: !0
-                                })
-                            }
-                        }, {
-                            key: "_hideStyleBlur",
-                            value: function() {
-                                this._player.trigger("hideOverlayBlur")
-                            }
-                        }, {
-                            key: "_destroyPlayer",
-                            value: function() {
-                                this._player.trigger("destroyPlayer")
-                            }
-                        }, {
-                            key: "_showMessage",
-                            value: function(options) {
-                                this._player.trigger("showOverlayMessage", options)
-                            }
-                        }, {
-                            key: "_useLowestQualityStream",
-                            value: function() {
-                                this._player.tech_.hls && this._player.tech_.hls.playlists.master && (this._player.tech_.hls.selectPlaylist = this._getPlaylistWithLowestBitrate.bind(this))
-                            }
-                        }, {
-                            key: "_removeQualitySelector",
-                            value: function() {
-                                var _this2 = this,
-                                    removeQualitySelector = function() {
-                                        var container = _this2._player.getChild("controlBar");
-                                        container.getChild("qualitySelectorButton") && container.removeChild("qualitySelectorButton"), container.getChild("qualitySelectorItem") && container.removeChild("qualitySelectorItem")
-                                    };
-                                removeQualitySelector(), this._player.one("loadedmetadata", removeQualitySelector.bind(this))
-                            }
-                        }, {
-                            key: "_getPlaylistWithLowestBitrate",
-                            value: function() {
-                                var playlists = this._player.tech_.hls.playlists,
-                                    resolutions = playlists.master.playlists.map(function(playlist) {
-                                        return playlist.attributes && playlist.attributes.RESOLUTION && playlist.attributes.RESOLUTION.height
-                                    }).filter(function(resolution) {
-                                        return resolution
-                                    }).sort(function(a, b) {
-                                        return a - b
-                                    }),
-                                    resolution = resolutions[0];
-                                return playlists.master.playlists.filter(function(playlist) {
-                                    return playlist.attributes.RESOLUTION && playlist.attributes.RESOLUTION.height === resolution
-                                })[0]
-                            }
-                        }, {
-                            key: "_log",
-                            value: function() {
-                                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-                                debugLog.apply(void 0, ["[#" + this._player.id() + "]"].concat(args))
-                            }
-                        }]), AdBlockerBlocker
-                    }();
-                exports.default = AdBlockerBlocker, _video2.default.plugin("adBlockerBlocker", function(options) {
-                    this.adBlockerBlocker = new AdBlockerBlocker(this, options)
-                })
+                )
             }, {
                 "../../../src/util/browser": 261,
                 debug: 16,
@@ -48385,7 +48296,7 @@ Swiper.prototype = {
                     pub.streams = streamsResponse[0].streams, pub.playerConfig.assumeImplicitSignaling = _isImplicitlySignalled(pub.streams.hls), pub.whitelistedDomains = whitelistedDomainsResponse[0], _populateSubtitles(videoResponse[0]), _populateVideo(videoResponse[0]), populateChannelFromApi(pub.playerConfig.video, function(error) {
                         return error ? void done("channel_fetch_error", {
                             error: error
-                        }) : (_populateLanguage(), _populateMTGxSkin(videoResponse[0]), _populateFreewheelPlugin(adinfoResponse[0].freewheel, videoResponse[0]), _populateMMSPlugin(), _populateGoogleAnalyticsPlugin(), _populateComscorePlugin(), _populateGallupPlugin(videoResponse[0]), _populateGemiusPlugin(videoResponse[0]), _populateAgeGating(videoResponse[0]), _populateCountdown(videoResponse[0]), _populateAdBlockerBlocker(videoResponse[0], adinfoResponse[0]), _populateDvrPlugin(videoResponse[0]), void suggestionsXHR.done(function(suggestionsResponse) {
+                        }) : (_populateLanguage(), _populateMTGxSkin(videoResponse[0]), _populateFreewheelPlugin(adinfoResponse[0].freewheel, videoResponse[0]), _populateMMSPlugin(), _populateGoogleAnalyticsPlugin(), _populateComscorePlugin(), _populateGallupPlugin(videoResponse[0]), _populateGemiusPlugin(videoResponse[0]), _populateAgeGating(videoResponse[0]), _populateCountdown(videoResponse[0]),_populateDvrPlugin(videoResponse[0]), void suggestionsXHR.done(function(suggestionsResponse) {
                             _populateSuggestions(videoResponse[0], suggestionsResponse)
                         }).always(function() {
                             done()
@@ -48501,17 +48412,6 @@ Swiper.prototype = {
                     until: pub.playerConfig.video.publishing_status.until,
                     template: _.template($("#template-player-countdown").html())()
                 })
-            },
-            _populateAdBlockerBlocker = function(video, adinfo) {
-                pub.playerConfig.plugins.adBlockerBlocker = {
-                    enabled: !adinfo.ab_allowed,
-                    label: _.template($("#template-ad-blocker-blocker").html(), {
-                        siteName: commonConfig.getDomain()
-                    }),
-                    style: "block"
-                }, pub.playerConfig.adBlockerDetection = {
-                    baitUrl: "/ad/banner/_adsense_/_adserver/_adview_.ad.json?adzone=top&adsize=300x250&advid=24812335"
-                }
             },
             _populateSuggestions = function(video, suggestions) {
                 if ("embed" !== pub.commonConfig.playerVersion && suggestions._embedded && suggestions._embedded.videos.length) {
